@@ -1,6 +1,21 @@
 import tensorflow as tf
 from tensorflow.keras import layers, models
 from tensorflow.keras.datasets import cifar10
+gpus = tf.config.experimental.list_physical_devices('GPU')
+if gpus:
+    try:
+        # 设置仅在需要时进行内存增长
+        for gpu in gpus:
+            tf.config.experimental.set_memory_growth(gpu, True)
+        # 设置仅使用第一个GPU设备
+        tf.config.experimental.set_visible_devices(gpus[0], 'GPU')
+        # 指定要使用的CUDA核心
+        tf.config.experimental.set_virtual_device_configuration(
+            gpus[0],
+            [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=8192)]
+        )
+    except RuntimeError as e:
+        print(e)
 
 # 加载数据集
 (train_images, train_labels), (test_images, test_labels) = cifar10.load_data()
