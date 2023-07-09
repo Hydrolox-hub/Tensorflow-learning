@@ -1,6 +1,9 @@
 import tensorflow as tf
 from tensorflow.keras import layers, models
 from tensorflow.keras.datasets import cifar10
+from tensorflow.keras.callbacks import TensorBoard
+
+tensorboard_callback = TensorBoard(log_dir='./logs')
 gpus = tf.config.experimental.list_physical_devices('GPU')
 if gpus:
     try:
@@ -66,7 +69,7 @@ model.compile(optimizer='adam',
               metrics=['accuracy'])
 
 # 训练模型，并添加早停回调
-model.fit(train_images, train_labels, epochs=50, validation_data=(test_images, test_labels), callbacks=[early_stopping])
+model.fit(train_images, train_labels, epochs=50, validation_data=(test_images, test_labels), callbacks=[early_stopping,tensorboard_callback])
 
 # 评估模型
 test_loss, test_acc = model.evaluate(test_images, test_labels)
