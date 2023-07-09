@@ -28,7 +28,6 @@ test_images = test_images / 255.0
 early_stopping = tf.keras.callbacks.EarlyStopping(patience=3)
 
 # 定义模型结构
-
 model = models.Sequential()
 model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)))
 model.add(layers.BatchNormalization())
@@ -51,6 +50,9 @@ model.add(layers.BatchNormalization())
 model.add(layers.Conv2D(512, (3, 3), activation='relu'))
 model.add(layers.BatchNormalization())
 model.add(layers.Flatten())
+model.add(layers.Dense(1024, activation='relu'))
+model.add(layers.BatchNormalization())
+model.add(layers.Dropout(0.5))
 model.add(layers.Dense(512, activation='relu'))
 model.add(layers.BatchNormalization())
 model.add(layers.Dropout(0.5))
@@ -58,7 +60,6 @@ model.add(layers.Dense(256, activation='relu'))
 model.add(layers.BatchNormalization())
 model.add(layers.Dropout(0.5))
 model.add(layers.Dense(10))
-
 # 编译模型
 model.compile(optimizer='adam',
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
@@ -70,3 +71,5 @@ model.fit(train_images, train_labels, epochs=50, validation_data=(test_images, t
 # 评估模型
 test_loss, test_acc = model.evaluate(test_images, test_labels)
 print('Test accuracy:', test_acc)
+
+#summary_writer = tf.summary.create_file_writer('lab7-logs-summary')
