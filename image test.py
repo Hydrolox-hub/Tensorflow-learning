@@ -75,4 +75,4 @@ model.fit(train_images, train_labels, epochs=50, validation_data=(test_images, t
 test_loss, test_acc = model.evaluate(test_images, test_labels)
 print('Test accuracy:', test_acc)
 
-#summary_writer = tf.summary.create_file_writer('lab7-logs-summary')
+#tensorboard --logdir=logs/
