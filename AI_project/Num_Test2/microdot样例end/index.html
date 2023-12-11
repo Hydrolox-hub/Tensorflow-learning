@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>esp32服务器网页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        button {
+            width: 200px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>操作控制小网页</b></h1>
+	<!--自动刷新时间设置-->
+	<meta http-equiv="refresh" content="2">
+    <button class="ledon">LED开灯</button>
+    <button class="ledoff">LED关灯</button><br><br>
+    <button class="rgbon">左RGB开灯</button>
+    <button class="rgboff">左RGB关灯</button><br><br>
+    <button class="musicon">右RGB开灯</button>
+    <button class="musicoff">右RGB关灯</button>
+    <script>
+        const ledonBtn = document.querySelector(".ledon");
+        const ledoffBtn = document.querySelector(".ledoff");
+        const rgbonBtn = document.querySelector(".rgbon");
+        const rgboffBtn = document.querySelector(".rgboff");
+        const musiconBtn = document.querySelector(".musicon");
+        const musicoffBtn = document.querySelector(".musicoff");
+        // 监听按钮点击事件
+        ledonBtn.addEventListener("click", (e) => {
+            fetch("/ledon", {
+                method: "get",
+            }).then(e => {
+                console.log("消息", e);
+            }).catch(error => {
+                console.log("报错了", error);
+            })
+        })
+        ledoffBtn.addEventListener("click", (e) => {
+            fetch("/ledoff").then(e => {
+                console.log("消息", e);
+            }).catch(error => {
+                console.log("报错了", error);
+            })
+        })
+        rgbonBtn.addEventListener("click", (e) => {
+            fetch("/rgbon", {
+                method: "get",
+            }).then(e => {
+                console.log("消息", e);
+            }).catch(error => {
+                console.log("报错了", error);
+            })
+        })
+        rgboffBtn.addEventListener("click", (e) => {
+            fetch("/rgboff").then(e => {
+                console.log("消息", e);
+            }).catch(error => {
+                console.log("报错了", error);
+            })
+        })
+        musiconBtn.addEventListener("click", (e) => {
+            fetch("/musicon", {
+                method: "get",
+            }).then(e => {
+                console.log("消息", e);
+            }).catch(error => {
+                console.log("报错了", error);
+            })
+        })
+        musicoffBtn.addEventListener("click", (e) => {
+            fetch("/musicoff").then(e => {
+                console.log("消息", e);
+            }).catch(error => {
+                console.log("报错了", error);
+            })
+        })	
+    </script>
+<h2>-----</h2>	
+</body>
+</html>

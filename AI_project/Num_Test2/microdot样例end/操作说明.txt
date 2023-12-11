@@ -1,0 +1,4 @@
+（1）将microdot.py和temphtml.py上传到MYBIT主板根目录
+（2）运行testmicodot.py程序
+（3）查看网络连接返回的MYBIT主板IP
+（4）用同网终端浏览器查看网页http://IP:5000/并进行按钮操作
